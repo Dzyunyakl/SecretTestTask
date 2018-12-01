@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TestTaskRemmeDataLayer\TestTaskRemmeDataLayer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Database.cs" />
+      <Compile Remove="Extensions\State.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore">
+        <Version>2.1.4</Version>
+      </PackageReference>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.deps.json
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.dll
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.pdb
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.dll
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.pdb
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.csprojAssemblyReference.cache
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.csproj.CoreCompileInputs.cache
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.AssemblyInfoInputs.cache
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.AssemblyInfo.cs
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.csproj.CopyComplete
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.dll
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeBusinessLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeBusinessLayer.pdb

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskRemme", "TestTaskRemme\TestTaskRemme.csproj", "{A27B2EA3-536D-482C-8BB7-0F7C87A59482}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskRemmeDataLayer", "TestTaskRemmeDataLayer\TestTaskRemmeDataLayer.csproj", "{25B37A49-76A1-4AE5-ABD1-B1B1A88B91F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskRemmeBusinessLayer", "TestTaskRemmeBusinessLayer\TestTaskRemmeBusinessLayer.csproj", "{1DBDED02-5D38-4759-8FCF-41583C9BE844}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A27B2EA3-536D-482C-8BB7-0F7C87A59482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A27B2EA3-536D-482C-8BB7-0F7C87A59482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A27B2EA3-536D-482C-8BB7-0F7C87A59482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A27B2EA3-536D-482C-8BB7-0F7C87A59482}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25B37A49-76A1-4AE5-ABD1-B1B1A88B91F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25B37A49-76A1-4AE5-ABD1-B1B1A88B91F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25B37A49-76A1-4AE5-ABD1-B1B1A88B91F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25B37A49-76A1-4AE5-ABD1-B1B1A88B91F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DBDED02-5D38-4759-8FCF-41583C9BE844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DBDED02-5D38-4759-8FCF-41583C9BE844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DBDED02-5D38-4759-8FCF-41583C9BE844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DBDED02-5D38-4759-8FCF-41583C9BE844}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

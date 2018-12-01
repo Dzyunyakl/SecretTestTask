@@ -1,0 +1,11 @@
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.deps.json
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.runtimeconfig.json
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.runtimeconfig.dev.json
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.dll
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/bin/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.pdb
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.csprojAssemblyReference.cache
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.csproj.CoreCompileInputs.cache
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.AssemblyInfoInputs.cache
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.AssemblyInfo.cs
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.dll
+/Users/apple/RiderProjects/TestTaskRemme/TestTaskRemmeDataLayer/obj/Debug/netcoreapp2.1/TestTaskRemmeDataLayer.pdb
