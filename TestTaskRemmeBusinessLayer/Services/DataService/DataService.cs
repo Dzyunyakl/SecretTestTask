@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TestTaskRemmeBusinessLayer.Extensions;
 using TestTaskRemmeBusinessLayer.Services.AuthService;
 using TestTaskRemmeDataLayer.Database;
@@ -20,125 +22,125 @@ namespace TestTaskRemmeBusinessLayer.Services.DataService
             _authService = authService;
         }
 
-        public OperationResult<IEnumerable<Task>> GetAll(int userId)
+        public async Task<OperationResult<IEnumerable<Todo>>> GetAll(int userId)
         {
-            var authResult = _authService.Authorize(userId);
+            var authResult = await _authService.Authorize(userId);
 
             if (authResult.HttpStatusCode == HttpStatusCode.Unauthorized)
-                return OperationResult<IEnumerable<Task>>.Unauthorized();
+                return OperationResult<IEnumerable<Todo>>.Unauthorized();
 
             var user = authResult.Entity;
             switch (user.Role)
             {
                 case 0:
-                    return GetAllForUser(userId);
+                    return await GetAllForUser(userId);
                 case 1:
-                    return GetAllForAdmin();
+                    return await GetAllForAdmin();
             }
 
-            return OperationResult<IEnumerable<Task>>.NotFound($"Role {user.Role} isn't provided.");
+            return OperationResult<IEnumerable<Todo>>.NotFound($"Role {user.Role} isn't provided.");
         }
 
-        public OperationResult<IEnumerable<Task>> GetAllDone(int userId)
+        public async Task<OperationResult<IEnumerable<Todo>>> GetAllDone(int userId)
         {
-            var authResult = _authService.Authorize(userId);
+            var authResult = await _authService.Authorize(userId);
 
             if (authResult.HttpStatusCode == HttpStatusCode.Unauthorized)
-                return OperationResult<IEnumerable<Task>>.Unauthorized();
+                return OperationResult<IEnumerable<Todo>>.Unauthorized();
 
             var user = authResult.Entity;
             switch (user.Role)
             {
                 case 0:
-                    return GetAllDoneForUser(userId);
+                    return await GetAllDoneForUser(userId);
                 case 1:
-                    return GetAllDoneForAdmin();
+                    return await GetAllDoneForAdmin();
             }
 
-            return OperationResult<IEnumerable<Task>>.NotFound($"Role {user.Role} isn't provided.");
+            return OperationResult<IEnumerable<Todo>>.NotFound($"Role {user.Role} isn't provided.");
         }
 
-        public OperationResult<Task> GetById(int userId, int taskId)
+        public async Task<OperationResult<Todo>> GetById(int userId, int taskId)
         {
-            var authResult = _authService.Authorize(userId);
+            var authResult = await _authService.Authorize(userId);
 
             if (authResult.HttpStatusCode == HttpStatusCode.Unauthorized)
-                return OperationResult<Task>.Unauthorized();
+                return OperationResult<Todo>.Unauthorized();
 
             var user = authResult.Entity;
             switch (user.Role)
             {
                 case 0:
-                    return GetByIdForUser(userId, taskId);
+                    return await GetByIdForUser(userId, taskId);
                 case 1:
-                    return GetByIdForAdmin(taskId);
+                    return await GetByIdForAdmin(taskId);
             }
 
-            return OperationResult<Task>.NotFound($"Role {user.Role} isn't provided.");
+            return OperationResult<Todo>.NotFound($"Role {user.Role} isn't provided.");
         }
 
-        public OperationResult CreateTask(int userId, CreateTaskModel model)
+        public async Task<OperationResult> CreateTask(int userId, CreateTaskModel model)
         {
-            var authResult = _authService.Authorize(userId);
+            var authResult = await _authService.Authorize(userId);
 
             if (authResult.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return OperationResult.Unauthorized();
 
             var user = authResult.Entity;
 
-            _db.Tasks.Add(new Task
+            _db.Todos.Add(new Todo
             {
                 Info = model.Info,
                 IsDone = model.IsDone,
                 User = user
             });
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             return OperationResult.Ok("successfully added.");
         }
 
-        public OperationResult UpdateTask(int userId, int taskId, UpdateTaskModel model)
+        public async Task<OperationResult> UpdateTask(int userId, int taskId, UpdateTaskModel model)
         {
-            var authResult = _authService.Authorize(userId);
+            var authResult = await _authService.Authorize(userId);
 
             if (authResult.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return OperationResult.Unauthorized();
 
             var user = authResult.Entity;
 
-            var task = _db.Tasks.FirstOrDefault(t => t.Id == taskId);
-            if (task == null)
+            var todo = await _db.Todos.FirstOrDefaultAsync(t => t.Id == taskId);
+            if (todo == null)
                 return OperationResult.NotFound("Any task with such an id has been found.");
             switch (user.Role)
             {
                 case 0:
-                    if (task.User == user)
+                    if (todo.User == user)
                     {
-                        if(task.IsDone != model.IsDone)
-                            task.IsDone = model.IsDone;
-                        if(task.Info != model.Info && model.Info != null)
-                            task.Info = model.Info;
-                        _db.Tasks.Update(task);
-                        _db.SaveChanges();
+                        if(todo.IsDone != model.IsDone)
+                            todo.IsDone = model.IsDone;
+                        if(todo.Info != model.Info && model.Info != null)
+                            todo.Info = model.Info;
+                        _db.Todos.Update(todo);
+                        await _db.SaveChangesAsync();
                         return OperationResult.Ok("successfully updated.");
                     }
                     else
                         return OperationResult.BadRequest("Permission denied.");
                 case 1:
-                    if(task.IsDone != model.IsDone)
-                        task.IsDone = model.IsDone;
-                    if(task.Info != model.Info)
-                        task.Info = model.Info;
-                    _db.Tasks.Update(task);
-                    _db.SaveChanges();
+                    if(todo.IsDone != model.IsDone)
+                        todo.IsDone = model.IsDone;
+                    if(todo.Info != model.Info)
+                        todo.Info = model.Info;
+                    _db.Todos.Update(todo);
+                    await _db.SaveChangesAsync();
                     return OperationResult.Ok("successfully updated.");
             }
 
             return OperationResult.NotFound($"Role {user.Role} isn't provided.");
         }
 
-        public OperationResult RemoveTask(int userId, int taskId)
+        public async Task<OperationResult> RemoveTask(int userId, int taskId)
         {
-            var authResult = _authService.Authorize(userId);
+            var authResult = await _authService.Authorize(userId);
 
             if (authResult.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return OperationResult.Unauthorized();
@@ -146,60 +148,60 @@ namespace TestTaskRemmeBusinessLayer.Services.DataService
             var user = authResult.Entity;
 
 
-            var task = _db.Tasks.FirstOrDefault(t => t.Id == taskId);
+            var todo = await _db.Todos.FirstOrDefaultAsync(t => t.Id == taskId);
 
 
-            if (task == null)
+            if (todo == null)
                 return OperationResult.NotFound();
 
             switch (user.Role)
             {
                 case 0:
-                    if (task.User == user)
+                    if (todo.User == user)
                     {
-                        _db.Tasks.Remove(task);
-                        _db.SaveChanges();
+                        _db.Todos.Remove(todo);
+                        await _db.SaveChangesAsync();
                         return OperationResult.Ok("successfully deleted");
                     }
                     else
                         return OperationResult.BadRequest("Permission denied.");
                 case 1:
-                    _db.Tasks.Remove(task);
-                    _db.SaveChanges();
+                    _db.Todos.Remove(todo);
+                    await _db.SaveChangesAsync();
                     return OperationResult.Ok("successfully deleted");
             }
 
             return OperationResult.NotFound($"Role {user.Role} isn't provided.");
         }
 
-        private OperationResult<IEnumerable<Task>> GetAllForAdmin() =>
-            OperationResult<IEnumerable<Task>>.Ok(_db.Tasks.ToList());
+        private async Task<OperationResult<IEnumerable<Todo>>> GetAllForAdmin() =>
+            OperationResult<IEnumerable<Todo>>.Ok(await _db.Todos.ToListAsync());
         
-        private OperationResult<IEnumerable<Task>> GetAllForUser(int userId) =>
-            OperationResult<IEnumerable<Task>>.Ok(_db.Tasks.Where(t => t.User.Id == userId).ToList());
+        private async Task<OperationResult<IEnumerable<Todo>>> GetAllForUser(int userId) =>
+            OperationResult<IEnumerable<Todo>>.Ok(await _db.Todos.Where(t => t.User.Id == userId).ToListAsync());
 
-        private OperationResult<IEnumerable<Task>> GetAllDoneForAdmin() =>
-            OperationResult<IEnumerable<Task>>.Ok(_db.Tasks.Where(t => t.IsDone).ToList());
+        private async Task<OperationResult<IEnumerable<Todo>>> GetAllDoneForAdmin() =>
+            OperationResult<IEnumerable<Todo>>.Ok(await _db.Todos.Where(t => t.IsDone).ToListAsync());
 
-        private OperationResult<Task> GetByIdForAdmin(int taskId)
+        private async Task<OperationResult<Todo>> GetByIdForAdmin(int taskId)
         {
-            var task = _db.Tasks.FirstOrDefault(t => t.Id == taskId);
-            if (task == null)
-                return OperationResult<Task>.NotFound();
-            return OperationResult<Task>.Ok(task);
+            var todo = await _db.Todos.FirstOrDefaultAsync(t => t.Id == taskId);
+            if (todo == null)
+                return OperationResult<Todo>.NotFound();
+            return OperationResult<Todo>.Ok(todo);
         }
 
         
 
-        private OperationResult<IEnumerable<Task>> GetAllDoneForUser(int userId) =>
-            OperationResult<IEnumerable<Task>>.Ok(_db.Tasks.Where(t => t.User.Id == userId && t.IsDone).ToList());
+        private async Task<OperationResult<IEnumerable<Todo>>> GetAllDoneForUser(int userId) =>
+            OperationResult<IEnumerable<Todo>>.Ok(await _db.Todos.Where(t => t.User.Id == userId && t.IsDone).ToListAsync());
 
-        private OperationResult<Task> GetByIdForUser(int userId, int taskId)
+        private async Task<OperationResult<Todo>> GetByIdForUser(int userId, int taskId)
         {
-            var task = _db.Tasks.FirstOrDefault(t => t.Id == taskId && t.User.Id == userId);
-            if (task == null)
-                return OperationResult<Task>.NotFound();
-            return OperationResult<Task>.Ok(task);
+            var todo = await _db.Todos.FirstOrDefaultAsync(t => t.Id == taskId && t.User.Id == userId);
+            if (todo == null)
+                return OperationResult<Todo>.NotFound();
+            return OperationResult<Todo>.Ok(todo);
         }
     }
 }

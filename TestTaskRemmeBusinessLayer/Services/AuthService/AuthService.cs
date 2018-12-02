@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TestTaskRemmeBusinessLayer.Extensions;
 using TestTaskRemmeDataLayer.Database;
 using TestTaskRemmeDataLayer.Models;
@@ -14,9 +16,9 @@ namespace TestTaskRemmeBusinessLayer.Services.AuthService
         {
             _db = db;
         }
-        public OperationResult<User> Authorize(int id)
+        public async Task<OperationResult<User>> Authorize(int id)
         {
-            var users = _db.Users.ToList();
+            var users = await _db.Users.ToListAsync();
             var user = users.FirstOrDefault(u => u.Id == id);
             if (user == null)
                 return OperationResult<User>.Unauthorized();

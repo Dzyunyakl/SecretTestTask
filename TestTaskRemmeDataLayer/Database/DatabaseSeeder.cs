@@ -24,11 +24,11 @@ namespace TestTaskRemmeDataLayer.Database
                 var user2 = _context.Users.FirstOrDefault(i => i.Name == "anna");
                 if (user1 == null || user2 == null)
                     throw new Exception("didn't find user1 and user2");
-                _context.Tasks.AddRange(
-                    new Task { User = user1, Info = "first task for user1" },
-                    new Task { User = user2, Info = "first task for user2" },
-                    new Task { User = user1, Info = "second task for user1" },
-                    new Task { User = user2, Info = "second task for user2" }
+                _context.Todos.AddRange(
+                    new Todo { User = user1, Info = "first task for user1" },
+                    new Todo { User = user2, Info = "first task for user2" },
+                    new Todo { User = user1, Info = "second task for user1" },
+                    new Todo { User = user2, Info = "second task for user2" }
                 );
                 _context.SaveChanges();
                 var user11 = _context.Users.FirstOrDefault(u => u.Name == "lev");

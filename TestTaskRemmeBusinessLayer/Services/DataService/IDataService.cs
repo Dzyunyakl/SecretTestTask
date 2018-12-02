@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TestTaskRemmeBusinessLayer.Extensions;
 using TestTaskRemmeDataLayer.Models;
 using TestTaskRemmeDataLayer.ViewModels;
@@ -7,11 +8,11 @@ namespace TestTaskRemmeBusinessLayer.Services.DataService
 {
     public interface IDataService
     {
-        OperationResult<IEnumerable<Task>> GetAll(int userId);
-        OperationResult<IEnumerable<Task>> GetAllDone(int userId);
-        OperationResult<Task> GetById(int userId, int taskId);
-        OperationResult CreateTask(int userId, CreateTaskModel model);
-        OperationResult UpdateTask(int userId, int taskId, UpdateTaskModel model);
-        OperationResult RemoveTask(int userId, int taskId);
+        Task<OperationResult<IEnumerable<Todo>>> GetAll(int userId);
+        Task<OperationResult<IEnumerable<Todo>>> GetAllDone(int userId);
+        Task<OperationResult<Todo>> GetById(int userId, int taskId);
+        Task<OperationResult> CreateTask(int userId, CreateTaskModel model);
+        Task<OperationResult> UpdateTask(int userId, int taskId, UpdateTaskModel model);
+        Task<OperationResult> RemoveTask(int userId, int taskId);
     }
 }

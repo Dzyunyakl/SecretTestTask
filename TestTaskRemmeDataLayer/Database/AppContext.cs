@@ -12,14 +12,14 @@ namespace TestTaskRemmeDataLayer.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .HasMany(c => c.Tasks)
+                .HasMany(c => c.Todos)
                 .WithOne(e => e.User);
 
-            modelBuilder.Entity<Task>().Property(a => a.IsDone).HasDefaultValue(false);
-            //modelBuilder.Entity<User>().Property(a => a.Tasks).IsConcurrencyToken();
+            modelBuilder.Entity<Todo>().Property(a => a.IsDone).HasDefaultValue(false);
+            //modelBuilder.Entity<User>().Property(a => a.Todos).IsConcurrencyToken();
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Todo> Todos { get; set; }
     }
 }

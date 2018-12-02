@@ -1,6 +1,6 @@
 namespace TestTaskRemmeDataLayer.Models
 {
-    public class Task
+    public class Todo
     {
         public int Id { get; set; }
         public string Info { get; set; }

@@ -20,14 +20,14 @@ namespace TestTaskRemme.Controllers
         {
             _dataService = dataService;
         }
-        // GET api/tasks/all
-        [HttpGet("all")]
-        public ActionResult<IEnumerable<GetAllModel>> GetAll()
+        // GET api/tasks
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GetAllModel>>> GetAll()
         {
             var userId = Request.Headers["id"];
             if (userId.ToString() == "")
                 return Unauthorized();
-            var result = _dataService.GetAll(int.Parse(userId));
+            var result = await _dataService.GetAll(int.Parse(userId));
 
             if (result.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return Unauthorized();
@@ -48,12 +48,12 @@ namespace TestTaskRemme.Controllers
         
         // GET api/tasks/done
         [HttpGet("done")]
-        public ActionResult<IEnumerable<GetAllModel>> GetAllDone()
+        public async Task<ActionResult<IEnumerable<GetAllModel>>> GetAllDone()
         {
             var userId = Request.Headers["id"];
             if (userId.ToString() == "")
                 return Unauthorized();
-            var result = _dataService.GetAllDone(int.Parse(userId));
+            var result = await _dataService.GetAllDone(int.Parse(userId));
 
             if (result.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return Unauthorized();
@@ -72,14 +72,14 @@ namespace TestTaskRemme.Controllers
             return BadRequest();
         }
 
-        // GET api/tasks/get/5
-        [HttpGet("get/{taskId}")]
-        public ActionResult<Task> GetById(int taskId)
+        // GET api/tasks/5
+        [HttpGet("{taskId}")]
+        public async Task<ActionResult<Task>> GetById(int taskId)
         {
             var userId = Request.Headers["id"];
             if (userId.ToString() == "")
                 return Unauthorized();
-            var result = _dataService.GetById(int.Parse(userId), taskId);
+            var result = await _dataService.GetById(int.Parse(userId), taskId);
             
             if (result.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return Unauthorized();
@@ -98,12 +98,12 @@ namespace TestTaskRemme.Controllers
 
         // PUT api/tasks
         [HttpPut]
-        public ActionResult<string> CreateTask([FromBody]CreateTaskModel model)
+        public async Task<ActionResult<string>> CreateTask([FromBody]CreateTaskModel model)
         {
             var userId = Request.Headers["id"];
             if (userId.ToString() == "")
                 return Unauthorized();
-            var result = _dataService.CreateTask(int.Parse(userId), model);
+            var result = await _dataService.CreateTask(int.Parse(userId), model);
             
             if (result.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return Unauthorized();
@@ -115,13 +115,13 @@ namespace TestTaskRemme.Controllers
 
         // POST api/tasks/5
         [HttpPost("{taskId}")]
-        public ActionResult<string> Update(int taskId, [FromBody]UpdateTaskModel model)
+        public async Task<ActionResult<string>> Update(int taskId, [FromBody]UpdateTaskModel model)
         {
             var userId = Request.Headers["id"];
             if (userId.ToString() == "")
                 return Unauthorized();
             
-            var result = _dataService.UpdateTask(int.Parse(userId), taskId, model);
+            var result = await _dataService.UpdateTask(int.Parse(userId), taskId, model);
             
             if (result.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return Unauthorized();
@@ -133,12 +133,12 @@ namespace TestTaskRemme.Controllers
 
         // DELETE api/tasks/5
         [HttpDelete("{taskId}")]
-        public ActionResult<string> Delete(int taskId)
+        public async Task<ActionResult<string>> Delete(int taskId)
         {
             var userId = Request.Headers["id"];
             if (userId.ToString() == "")
                 return Unauthorized();
-            var result = _dataService.RemoveTask(int.Parse(userId), taskId);
+            var result = await _dataService.RemoveTask(int.Parse(userId), taskId);
             
             if (result.HttpStatusCode == HttpStatusCode.Unauthorized)
                 return Unauthorized();
